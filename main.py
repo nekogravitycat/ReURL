@@ -11,6 +11,10 @@ def add(code: str, orig: str):
     print("Empty input")
     return
 
+  #adds https protocol if not exists
+  if(not orig.startswith("https://") and not orig.startswith("http://")):
+    orig = f"https://{orig}"
+
   if(re.match(r"^[\w-]+$", code)):
     db[code] = orig
     print("Added successfully!")
@@ -28,6 +32,18 @@ def delete(code: str):
     print("Key does not exist")
 
 
+#if a bot visits, redirect them to the cat video rather the rick roll
+def rickroll_fake(url: str, agent: str) -> bool:
+  if(url != "https://youtu.be/dQw4w9WgXcQ"):
+    return False
+  
+  for key in ["bot", "facebook"]:
+    if(key in agent):
+      return True
+  
+  return False
+
+
 @app.route("/")
 def home():
   return flask.redirect("https://www.nekogc.me")
@@ -36,9 +52,10 @@ def home():
 @app.route("/<url>")
 def convert(url):
   print(flask.request.user_agent)
-  if("bot" in flask.request.headers.get("User-Agent")):
-    if(db[url] == "https://youtu.be/dQw4w9WgXcQ"):
-      return flask.redirect("https://youtu.be/lk-Br9AVVXU")
+
+  if(rickroll_fake(db[url], flask.request.headers.get("User-Agent"))):
+    return flask.redirect("https://youtu.be/lk-Br9AVVXU") #cat vid
+  
   if(url in db.keys()):
     return flask.redirect(db[url])
   else:
@@ -55,12 +72,14 @@ while(True):
   command = input()
 
   if(command == "del-all"):
-    print("Are you sure to delete all links?\n[Y/N]")
+    print("Are you sure to delete all links?\n[Y/N]", end=": ")
     confirm = input()
 
     if(confirm == "y" or confirm == "Y"):
       for k in db.keys():
         del db[k]
+    
+    print("cancelled")
   
   elif(command == "list"):
     for k in db.keys():
