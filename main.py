@@ -34,7 +34,7 @@ def delete(code: str):
 
 #if a bot visits, redirect them to the cat video rather the rick roll
 def rickroll_fake(url: str, agent: str) -> bool:
-  if(url != "https://youtu.be/dQw4w9WgXcQ"):
+  if(url != "https://youtu.be/dQw4w9WgXcQ"): #rick roll vid
     return False
   
   for key in ["bot", "facebook"]:
@@ -51,15 +51,18 @@ def home():
 
 @app.route("/<url>")
 def convert(url):
-  print(flask.request.user_agent)
-
-  if(rickroll_fake(db[url], flask.request.headers.get("User-Agent"))):
-    return flask.redirect("https://youtu.be/lk-Br9AVVXU") #cat vid
+  agent: str = flask.request.headers.get("User-Agent")
+  print(agent)
   
   if(url in db.keys()):
+    if(rickroll_fake(db[url], agent)):
+      #return a cat vid
+      return flask.redirect("https://youtu.be/lk-Br9AVVXU")
+    #return the orig links
     return flask.redirect(db[url])
   else:
     flask.abort(404)
+
 
 def run():
   app.run(host = '0.0.0.0', port = 8080)
