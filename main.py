@@ -46,7 +46,7 @@ def rickroll_fake(url: str, agent: str) -> bool:
 
 @app.route("/")
 def home():
-  return flask.redirect("https://www.nekogc.me")
+  return flask.redirect("https://www.nekogc.com")
 
 
 @app.route("/<url>")
