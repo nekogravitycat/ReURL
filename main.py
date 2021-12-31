@@ -12,7 +12,7 @@ def add(code: str, orig: str):
     return
 
   #adds https protocol if not exists
-  if(not orig.startswith("https://") and not orig.startswith("http://")):
+  if(not (orig.startswith("https://") or orig.startswith("http://"))):
     orig = f"https://{orig}"
 
   if(re.match(r"^[\w-]+$", code)):
@@ -32,18 +32,6 @@ def delete(code: str):
     print("Key does not exist")
 
 
-#if a bot visits, redirect them to the cat video rather the rick roll
-def rickroll_fake(url: str, agent: str) -> bool:
-  if(url != "https://youtu.be/dQw4w9WgXcQ"): #rick roll vid
-    return False
-  
-  for key in ["bot", "facebook"]:
-    if(key in agent):
-      return True
-  
-  return False
-
-
 @app.route("/")
 def home():
   return flask.redirect("https://www.nekogc.com")
@@ -51,14 +39,7 @@ def home():
 
 @app.route("/<url>")
 def convert(url):
-  agent: str = flask.request.headers.get("User-Agent")
-  print(agent)
-  
   if(url in db.keys()):
-    if(rickroll_fake(db[url], agent)):
-      #return a cat vid
-      return flask.redirect("https://youtu.be/lk-Br9AVVXU")
-    #return the orig links
     return flask.redirect(db[url])
   else:
     flask.abort(404)
