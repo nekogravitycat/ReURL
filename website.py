@@ -69,6 +69,7 @@ def home():
 def convert(url):
 	if(url in db.keys()):
 		return flask.redirect(db[url])
+		
 	else:
 		flask.abort(404)
 

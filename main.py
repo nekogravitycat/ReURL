@@ -7,5 +7,6 @@ def main() -> None:
 	while(True):
 		cmd = input()
 
+
 if(__name__ == "__main__"):
 	main()
