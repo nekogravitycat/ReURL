@@ -43,8 +43,10 @@ def login() -> str:
 def home():
 	# for verifying users
 	token: str = flask.request.cookies.get("token")
+	
 	if(not token):
 		return flask.redirect("/login")
+		
 	elif(token != os.environ["admin_token"]):
 		return flask.redirect("/login?w=1")
 	
@@ -70,8 +72,12 @@ def convert(url):
 	if(url in db.keys()):
 		return flask.redirect(db[url])
 		
-	else:
-		flask.abort(404)
+	flask.abort(404)
+
+
+@app.route("/utr")
+def up_time_robot() -> str:
+	return "hello, uptimerobot!"
 
 
 def run() -> None:

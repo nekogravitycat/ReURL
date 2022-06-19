@@ -9,7 +9,8 @@ class status:
 
 class url:
 	def is_legal(key: str) -> bool:
-		return re.match(r"^[\w-]+$", key) and not (key == "login")
+		illeagal: list = ["login", "utr"]
+		return re.match(r"^[\w-]+$", key) and not key in illeagal
 	
 	def add(dest: str, orig: str) -> str:
 		if(not dest or not orig):
