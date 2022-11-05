@@ -14,7 +14,7 @@ def verify(token):
 	if not token:
 		return flask.redirect("/login")
 
-	elif token != os.environ["admin_token"]:
+	elif token != os.environ["token_sha"]:
 		return flask.redirect("/login?w=1")
 
 	return None
