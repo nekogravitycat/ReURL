@@ -17,10 +17,11 @@ def load_table():
 	if not os.path.exists(table_file):
 		f = open(table_file, "w+")
 		f.close()
-
-	with open(table_file, "r") as f:
-		global table
-		table = json.loads(f.read())
+	
+	else:
+		with open(table_file, "r") as f:
+			global table
+			table = json.loads(f.read())
 
 
 def dump_table():
