@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-scale="large">
+	<head>
+		<meta charset="utf-8">
+		<!-- import Tocas UI form CloudFlare CDN -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.1.0/tocas.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.1.0/tocas.min.js"
+		        integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb"
+		        crossorigin="anonymous"></script>
+		<!-- import Noto Sans TC from Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+		<!-- other configurations -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href="https://replit.com/public/icons/favicon-196.png" sizes="196x196" type="image/png"/>
+		<title>URLs Management</title>
+	</head>
+	<body>
+		<div class="ts-container is-narrow">
+			<div class="ts-space is-large"></div>
+			<div class="ts-center">
+				<!-- create tab -->
+				<div id="create-tab">
+					<div class="ts-segment is-padded is-secondary">
+						<form>
+							<!-- title -->
+							<div class="ts-header is-heavy is-big is-center-aligned">Create a new connection</div>
+							<div class="ts-space"></div>
+							<!-- destination -->
+							<div class="ts-header is-heavy">Where will you take your audience?</div>
+							<div class="ts-space is-small"></div>
+							<label>
+								<span class="ts-text is-label">Destination</span>
+								<div class="ts-space is-small"></div>
+								<div class="ts-input is-solid">
+								    <input type="text" name="orig" placeholder="https://my-long-url.com" required>
+								</div>
+							</label>
+							<!-- divider -->
+							<div class="ts-space is-large"></div>
+							<div class="ts-divider"></div>
+							<div class="ts-space is-large"></div>
+							<!-- custom url -->
+							<div class="ts-header is-heavy">How do you want to share?</div>
+							<div class="ts-space is-small"></div>
+							<div class="ts-grid is-stackable">
+								<!-- domain -->
+								<div class="column is-4-wide">
+									<label>
+										<span class="ts-text is-label">Domain</span>
+										<div class="ts-space is-small"></div>
+										<div class="ts-input is-solid">
+											<input type="text" placeholder="t.nekogc.com" disabled>
+										</div>
+									</label>
+								</div>
+								<!-- custom back-half -->
+								<div class="column is-12-wide">
+									<label>
+										<span class="ts-text is-label">Custom back-half (optional)</span>
+										<div class="ts-space is-small"></div>
+										<div class="ts-input is-solid">
+											<input type="text" name="short">
+										</div>
+									</label>
+								</div>
+							</div>
+							<!-- divider -->
+							<div class="ts-space is-large"></div>
+							<div class="ts-divider"></div>
+							<div class="ts-space is-large"></div>
+							<!-- submit -->
+							<div class="ts-row is-end-aligned">
+								<div class="column">
+									<button class="ts-button">Create</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="ts-space"></div>
+			<!-- message -->
+			<div id="msg" style="display: none;">
+				<div class="ts-content is-fitted is-rounded" style="background-color: var(--ts-static-negative-400);" id="msg-box">
+					<div class="ts-row">
+						<div class="column is-fluid">
+							<div class="ts-content is-dense">
+								<!-- title -->
+								<span class="ts-text is-tiny is-bold" id="msg-title">Operation {{status}}: </span>
+								<!-- detail -->
+								<span class="ts-text is-tiny" id="msg-detail">{{detail}}</span>
+							</div>
+						</div>
+						<div class="column">
+							<div class="ts-center">
+								<button class="ts-button is-icon is-ghost" onclick="close_msg()">
+									<span class="ts-icon is-xmark-icon"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ts-space is-large"></div>
+		</div>
+	</body>
+	<script>
+		function init_msg(){
+			if("{{status}}" !== "" || "{{detail}}" !== ""){
+				let msg = document.getElementById("msg");
+				msg.style.display = null;
+				let msg_box = document.getElementById("msg-box");
+				switch("{{status}}"){
+					case "successful":
+						msg_box.style.backgroundColor = "var(--ts-static-positive-400)";
+						return;
+					case "failed":
+						msg_box.style.backgroundColor = "var(--ts-static-negative-400)";
+						return;
+					default:
+						msg_box.style.backgroundColor = "var(--ts-static-gray-900)";
+						return;
+				}
+			}
+		}
+		function close_msg(){
+			let msg = document.getElementById("msg");
+			msg.style.display = "none";
+		}
+		window.onload = init_msg;
+	</script>
+</html>

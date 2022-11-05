@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-scale="large">
+	<head>
+		<meta charset="utf-8">
+		<!-- import Tocas UI form CloudFlare CDN -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.1.0/tocas.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.1.0/tocas.min.js"
+		        integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb"
+		        crossorigin="anonymous"></script>
+		<!-- import Noto Sans TC from Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+		<!-- other configurations -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href="https://replit.com/public/icons/favicon-196.png" sizes="196x196" type="image/png"/>
+		<title>URLs Management</title>
+	</head>
+	<body>
+		<div class="ts-space is-large"></div>
+		<div class="ts-container is-narrow">
+			<!-- create tab -->
+			<div id="create-tab">
+				<div class="ts-segment is-padded">
+					<form>
+						<!-- title -->
+						<div class="ts-header is-heavy is-big is-center-aligned">Create a new connection</div>
+						<div class="ts-space"></div>
+						<!-- destination -->
+						<div class="ts-header is-heavy">Where will you take your audience?</div>
+						<div class="ts-space is-small"></div>
+						<label>
+							<span class="ts-text is-label">Destination</span>
+							<div class="ts-space is-small"></div>
+							<div class="ts-input is-solid">
+							    <input type="text" name="orig" placeholder="https://my-long-url.com" required>
+							</div>
+						</label>
+						<!-- divider -->
+						<div class="ts-space is-large"></div>
+						<div class="ts-divider"></div>
+						<div class="ts-space is-large"></div>
+						<!-- custom url -->
+						<div class="ts-header is-heavy">How do you want to share?</div>
+						<div class="ts-space is-small"></div>
+						<div class="ts-grid is-stackable">
+							<!-- domain -->
+							<div class="column is-4-wide">
+								<label>
+									<span class="ts-text is-label">Domain</span>
+									<div class="ts-space is-small"></div>
+									<div class="ts-input is-solid">
+										<input type="text" placeholder="t.nekogc.com" disabled>
+									</div>
+								</label>
+							</div>
+							<!-- custom back-half -->
+							<div class="column is-12-wide">
+								<label>
+									<span class="ts-text is-label">Custom back-half (optional)</span>
+									<div class="ts-space is-small"></div>
+									<div class="ts-input is-solid">
+										<input type="text" name="short">
+									</div>
+								</label>
+							</div>
+						</div>
+						<!-- divider -->
+						<div class="ts-space is-large"></div>
+						<div class="ts-divider"></div>
+						<div class="ts-space is-large"></div>
+						<!-- submit -->
+						<div class="ts-row is-end-aligned">
+							<div class="column">
+								<button class="ts-button">Create</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- divider -->
+				<div class="ts-space is-large"></div>
+				<!-- links.html tab -->
+				<div id="links-tab">
+					<div class="ts-segment is-padded">
+						<!-- title -->
+						<div class="ts-header is-heavy is-big is-center-aligned">All links</div>
+						<div class="ts-space"></div>
+						<!-- list -->
+						<div class="ts-box">
+							<table class="ts-table is-striped">
+								<thead>
+									<tr>
+										<th class="is-collapsed">Back-half</th>
+										<th>Destination</th>
+										<th class="is-collapsed">Operation</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="is-collapsed">LCXTR</td>
+										<td>https://twitter.com/nekogravitycat</td>
+										<td class="is-end-aligned">
+											<span class="ts-icon is-rounded is-pencil-icon"></span>
+											<span class="ts-icon is-rounded is-trash-icon is-negative"></span>
+										</td>
+									</tr>
+									<tr>
+										<td class="is-collapsed">PLFTE</td>
+										<td>https://onlyfans.com/nekogravitycat</td>
+										<td class="is-end-aligned">
+											<span class="ts-icon is-rounded is-pencil-icon"></span>
+											<span class="ts-icon is-rounded is-trash-icon is-negative"></span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
