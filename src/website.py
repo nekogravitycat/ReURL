@@ -63,25 +63,30 @@ def root():
 		return flask.render_template("create.html")
 
 	# for POST method
-	orig: str = flask.request.form["orig"]
-	short: str = flask.request.form["short"]
+	orig: str = flask.request.form.get("orig")
+	short: str = flask.request.form.get("short")
+	override: str = flask.request.form.get("override")
 
 	# create a random 6-character-long back-half if not provided
 	if not short:
 		short = "".join(random.choices(string.ascii_uppercase, k=6))
 
-	operation = url.add(orig, short)
+	operation = url.add(orig, short, override)
 
-	if operation.ok:
+	if operation.status == 0:
 		short_url: str = f"t.nekogc.com/{short}"
 		return flask.render_template("create.html", status="successful", detail=f"{short_url}")
 
-	return flask.render_template("create.html", status="failed", detail=operation.detail)
+	elif operation.status == 1:
+		return flask.render_template("create.html", status="failed", detail=operation.detail)
+
+	elif operation.status == 2:
+		return flask.render_template("create.html", status="interrupted", override="1", orig=orig, short=short, detail=operation.detail)
 
 
 @app.route("/<short>")
 def convert(short):
-	if url.url_exists(short):
+	if not url.url_exists(short):
 		return flask.abort(404)
 
 	return flask.redirect(url.table[short])
