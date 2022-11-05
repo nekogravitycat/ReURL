@@ -20,7 +20,7 @@ def verify(token):
 	return None
 
 
-@app.route("/login")
+@app.route("/login", methods=["POST", "GET"])
 def login():
 	# for GET method
 	if flask.request.method == "GET":
@@ -49,7 +49,7 @@ def login():
 	return flask.render_template("login.html", wrong="1")
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def root():
 	# verify user
 	token = flask.request.cookies.get("token")
