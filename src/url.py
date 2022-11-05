@@ -15,7 +15,8 @@ class Status:
 
 def load_table():
 	if not os.path.exists(table_file):
-		open(table_file, "w+")
+		f = open(table_file, "w+")
+		f.close()
 
 	with open(table_file, "r") as f:
 		global table
