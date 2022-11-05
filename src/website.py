@@ -4,7 +4,7 @@ import string
 import random
 import hashlib
 from datetime import datetime, timedelta
-import url
+import src.url
 
 
 app = flask.Flask("")
