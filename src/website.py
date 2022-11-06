@@ -83,10 +83,12 @@ def root():
 	elif operation.status == 2:
 		return flask.render_template("create.html", status="interrupted", override="1", orig=orig, short=short, detail=operation.detail)
 
+	return flask.abort(500, f"unknown operation status code: {operation.status}")
+
 
 @app.route("/<short>")
 def convert(short):
 	if not url.url_exists(short):
-		return flask.abort(404)
+		flask.abort(404)
 
 	return flask.redirect(url.table[short])

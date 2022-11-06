@@ -9,7 +9,7 @@ table = {}
 
 class Status:
 	def __init__(self, status: int, detail: str = ""):
-		self.status: int = status # 0=ok, 1=failed, 2:interrupted (override confirm)
+		self.status: int = status  # 0=ok, 1=failed, 2:interrupted (override confirm)
 		self.detail: str = detail
 
 
