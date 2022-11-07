@@ -74,7 +74,7 @@ def root():
 	operation = url.add(orig, short, override)
 
 	if operation.status == 0:
-		short_url: str = f"t.nekogc.com/{short}"
+		short_url: str = f"t.gravitycat.tw/{short}"
 		return flask.render_template("create.html", status="successful", detail=f"{short_url}")
 
 	elif operation.status == 1:

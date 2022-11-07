@@ -15,13 +15,12 @@ class Status:
 
 def load_table():
 	if not os.path.exists(table_file):
-		f = open(table_file, "w+")
-		f.close()
+		with open(table_file, "w+") as f:
+			f.write(json.dumps({"admin":"https://t.gravitycat.tw"}))
 
-	else:
-		with open(table_file, "r") as f:
-			global table
-			table = json.loads(f.read())
+	with open(table_file, "r") as f:
+		global table
+		table = json.loads(f.read())
 
 
 def dump_table():
