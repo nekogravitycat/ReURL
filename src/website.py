@@ -89,6 +89,6 @@ def root():
 @app.route("/<short>")
 def convert(short):
 	if not url.url_exists(short):
-		flask.abort(404)
+		return flask.render_template("notfound.html")
 
 	return flask.redirect(url.table[short])
