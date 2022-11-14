@@ -63,8 +63,8 @@ def root():
 		return flask.render_template("create.html")
 
 	# for POST method
-	orig: str = flask.request.form.get("orig")
-	short: str = flask.request.form.get("short")
+	orig: str = flask.request.form.get("orig").strip()
+	short: str = flask.request.form.get("short").strip()
 	override: str = flask.request.form.get("override")
 
 	# create a random 6-character-long back-half if not provided
