@@ -14,7 +14,7 @@ def verify(token):
 	if not token:
 		return flask.redirect("/login")
 
-	elif token != os.environ["token_sha"]:
+	elif token != os.environ.get("token_sha"):
 		return flask.redirect("/login?w=1")
 
 	return None
@@ -29,7 +29,7 @@ def login():
 		if not token:
 			return flask.render_template("login.html")
 
-		elif token != os.environ["token_sha"]:
+		elif token != os.environ.get("token_sha"):
 			return flask.render_template("login.html", wrong="1")
 
 		return flask.redirect("/")
@@ -38,7 +38,7 @@ def login():
 	token = flask.request.form.get("token")
 	sha: str = hashlib.sha256(token.encode()).hexdigest()
 
-	if sha != os.environ["token_sha"]:
+	if sha != os.environ.get("token_sha"):
 		return flask.render_template("login.html", wrong="1")
 
 	elif token:
@@ -81,7 +81,14 @@ def root():
 		return flask.render_template("create.html", status="failed", detail=operation.detail)
 
 	elif operation.status == 2:
-		return flask.render_template("create.html", status="interrupted", override="1", orig=orig, short=short, detail=operation.detail)
+		return flask.render_template(
+			"create.html",
+			status="interrupted",
+			override="1",
+			orig=orig,
+			short=short,
+			detail=operation.detail
+		)
 
 	return flask.abort(500, f"unknown operation status code: {operation.status}")
 

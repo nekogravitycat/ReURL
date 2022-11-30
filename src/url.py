@@ -16,7 +16,7 @@ class Status:
 def load_table():
 	if not os.path.exists(table_file):
 		with open(table_file, "w+") as f:
-			f.write(json.dumps({"admin":"https://t.gravitycat.tw"}))
+			f.write(json.dumps({"admin": "https://t.gravitycat.tw"}))
 
 	with open(table_file, "r") as f:
 		global table
