@@ -35,7 +35,7 @@ def login():
 		return flask.redirect("/")
 
 	# for POST method
-	token = flask.request.form["token"]
+	token = flask.request.form.get("token")
 	sha: str = hashlib.sha256(token.encode()).hexdigest()
 
 	if sha != os.environ["token_sha"]:
