@@ -24,7 +24,7 @@ def root():
 
 
 @app.route("/admin", methods=["POST", "GET"])
-def root():
+def admin():
 	# verify user
 	token = flask.request.cookies.get("token")
 	auth = verify(token)
