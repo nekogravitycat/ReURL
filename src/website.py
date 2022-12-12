@@ -2,8 +2,6 @@ import os
 import flask
 import string
 import random
-import hashlib
-from datetime import datetime, timedelta
 from src import url
 
 
