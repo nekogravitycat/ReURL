@@ -1,21 +1,9 @@
-import os
 import flask
 import string
 import random
 from src import url
 
-
 app = flask.Flask("")
-
-
-def verify(token):
-	if not token:
-		return flask.redirect("/login")
-
-	elif token != os.environ.get("token_sha"):
-		return flask.redirect("/login?w=1")
-
-	return None
 
 
 @app.route("/")
@@ -25,13 +13,6 @@ def root():
 
 @app.route("/admin", methods=["POST", "GET"])
 def admin():
-	# verify user
-	token = flask.request.cookies.get("token")
-	auth = verify(token)
-
-	if auth is not None:
-		return auth
-
 	# for GET method
 	if flask.request.method == "GET":
 		return flask.render_template("create.html")
