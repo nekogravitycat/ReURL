@@ -23,7 +23,7 @@
 				<!-- create tab -->
 				<div id="create-tab">
 					<div class="ts-segment is-padded is-secondary">
-						<form action="/" method="post" onsubmit="form_submit()">
+						<form action="/admin" method="post" onsubmit="form_submit()">
 							<!-- title -->
 							<div class="ts-header is-heavy is-big is-center-aligned">Create a new connection</div>
 							<div class="ts-space"></div>
@@ -121,7 +121,7 @@
 			}
 			let form = document.createElement("form");
 			form.style.display = "none";
-			form.action = "/";
+			form.action = "/admin";
 			form.method = "POST";
 			let orig = document.createElement("input");
 			orig.value = "{{orig}}";
@@ -139,7 +139,7 @@
 			form.submit();
 		}
 		function cancel(){
-			window.location.replace("/");
+			window.location.replace("/admin");
 		}
 		function init_msg(){
 			if("{{status}}" !== "" || "{{detail}}" !== ""){

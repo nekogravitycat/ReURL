@@ -20,36 +20,12 @@ def verify(token):
 	return None
 
 
-@app.route("/login", methods=["POST", "GET"])
-def login():
-	# for GET method
-	if flask.request.method == "GET":
-		token: str = flask.request.cookies.get("token")
-
-		if not token:
-			return flask.render_template("login.html")
-
-		elif token != os.environ.get("token_sha"):
-			return flask.render_template("login.html", wrong="1")
-
-		return flask.redirect("/")
-
-	# for POST method
-	token = flask.request.form.get("token")
-	sha: str = hashlib.sha256(token.encode()).hexdigest()
-
-	if sha != os.environ.get("token_sha"):
-		return flask.render_template("login.html", wrong="1")
-
-	elif token:
-		resp = flask.make_response(flask.redirect("/"))
-		resp.set_cookie("token", value=sha, expires=(datetime.now()+timedelta(days=7)))
-		return resp
-
-	return flask.render_template("login.html", wrong="1")
+@app.route("/")
+def root():
+	return flask.redirect("/admin", code=301)
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/admin", methods=["POST", "GET"])
 def root():
 	# verify user
 	token = flask.request.cookies.get("token")
