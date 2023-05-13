@@ -3,10 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<!-- import Tocas UI form CloudFlare CDN -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.1.0/tocas.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.1.0/tocas.min.js"
-		        integrity="sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb"
-		        crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.3/tocas.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.3/tocas.min.js" integrity="sha384-J8poUFlsQLF0EAxMYat09bIUoMKWp0QFmIJXe8KjvV0epuVSl3wSlh/QhTtI8zNO" crossorigin="anonymous"></script>
 		<!-- import Noto Sans TC from Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com"/>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -85,35 +83,16 @@
 			</div>
 			<div class="ts-space"></div>
 			<!-- message -->
-			<div id="msg" style="display: none;">
-				<div class="ts-content is-fitted is-rounded" style="background-color: var(--ts-static-negative-400);" id="msg-box">
-					<div class="ts-row">
-						<div class="column is-fluid">
-							<div class="ts-content is-dense">
-								<!-- title -->
-								<span class="ts-text is-tiny is-bold" id="msg-title">Operation {{status}}: </span>
-								<!-- detail -->
-								<span class="ts-text is-tiny" id="msg-detail">{{detail}}</span>
-							</div>
-						</div>
-						<div class="column">
-							<div class="ts-center">
-								<button class="ts-button is-icon is-ghost" onclick="close_msg()">
-									<span class="ts-icon is-xmark-icon"></span>
-								</button>
-							</div>
-						</div>
+			<div class="ts-row is-center-aligned">
+				<div class="column"></div>
+		      <div class="ts-snackbar" id="msg" style="display: none;">
+			      <div class="content">Operation {{status}}: {{detail}}</div>
+			      <button class="action" id="msg_btn" onclick="click_msg()">close</button>
 					</div>
-				</div>
 			</div>
-			<div class="ts-space is-large"></div>
 		</div>
 	</body>
 	<script>
-		function close_msg(){
-			let msg = document.getElementById("msg");
-			msg.style.display = "none";
-		}
 		function override(){
 			if("{{orig}}" === "" || "{{short}}" === ""){
 				alert("prefill not completed. overriding failed");
@@ -144,22 +123,35 @@
 		function init_msg(){
 			if("{{status}}" !== "" || "{{detail}}" !== ""){
 				let msg = document.getElementById("msg");
+				let msg_btn = document.getElementById("msg_btn");
 				msg.style.display = null;
-				let msg_box = document.getElementById("msg-box");
 				switch("{{status}}"){
 					case "successful":
-						msg_box.style.backgroundColor = "var(--ts-static-positive-600)";
+						msg.style.backgroundColor = "var(--ts-static-positive-600)";
+						msg_btn.textContent = "copy";
 						return;
 					case "failed":
-						msg_box.style.backgroundColor = "var(--ts-static-negative-600)";
+						msg.style.backgroundColor = "var(--ts-static-negative-600)";
 						return;
 					case "interrupted":
-						msg_box.style.backgroundColor = "var(--ts-static-warning-600)";
+						msg.style.backgroundColor = "var(--ts-static-warning-600)";
 						return;
 					default:
-						msg_box.style.backgroundColor = "var(--ts-static-gray-900)";
+						msg.style.backgroundColor = "var(--ts-static-gray-900)";
 						return;
 				}
+			}
+		}
+		function click_msg(){
+			let msg_btn = document.getElementById("msg_btn");
+			switch(msg_btn.textContent){
+				case "copy":
+					navigator.clipboard.writeText("{{detail}}");
+					return;
+				default:
+					let msg = document.getElementById("msg");
+					msg.style.display = "none";
+					return;
 			}
 		}
 		function init_prefill(){
