@@ -39,9 +39,16 @@ def is_legal(key):
 	return re.match(r"^[\w-]+$", key) and key not in reserved
 
 
+def is_loop(url):
+	return "t.gravitycat.tw" in url
+
+
 def add(orig, short, override=None):
 	if not short or not orig:
 		return Status(1, "empty orig or shorten")
+	
+	if is_loop(orig):
+		return Status(1, "cannot shorten already shorten url")
 
 	if not is_legal(short):
 		return Status(1, "illegal shorten url")
