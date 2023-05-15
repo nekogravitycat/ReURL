@@ -144,7 +144,7 @@
 		}
 		function click_msg(){
 			let msg_btn = document.getElementById("msg_btn");
-			if(msg_btn.textContent == "copy" || msg_btn.textContent == "copied!"){
+			if(msg_btn.textContent === "copy" || msg_btn.textContent === "copied!"){
 				navigator.clipboard.writeText("https://{{detail}}");
 				msg_btn.textContent = "copied!";
 			}
