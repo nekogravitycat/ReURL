@@ -144,14 +144,13 @@
 		}
 		function click_msg(){
 			let msg_btn = document.getElementById("msg_btn");
-			switch(msg_btn.textContent){
-				case "copy":
-					navigator.clipboard.writeText("{{detail}}");
-					return;
-				default:
-					let msg = document.getElementById("msg");
-					msg.style.display = "none";
-					return;
+			if(msg_btn.textContent == "copy" || msg_btn.textContent == "copied!"){
+				navigator.clipboard.writeText("https://{{detail}}");
+				msg_btn.textContent = "copied!";
+			}
+			else{
+				let msg = document.getElementById("msg");
+				msg.style.display = "none";
 			}
 		}
 		function init_prefill(){
